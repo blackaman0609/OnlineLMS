@@ -6,11 +6,13 @@ import authRouter from "./route/authRoute.js"
 dotenv.config()
 import cors from "cors"
 import userRouter from "./route/userRoute.js"
+import courseRouter from "./route/courseRoute.js"
 
 const port = process.env.PORT
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
+app.use("/uploads", express.static("uploads")); 
 app.use(cors({
   origin:"http://localhost:5173",
   credentials:true
@@ -18,6 +20,7 @@ app.use(cors({
 
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
+app.use("/api/course", courseRouter)
 
 
 app.get("/", (req, res) => {
